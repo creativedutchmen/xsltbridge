@@ -12,6 +12,8 @@
 namespace Thapp\XsltBridge;
 
 use Illuminate\View\Environment;
+use Thapp\XmlBuilder\XmlBuilder;
+use Thapp\XmlBuilder\Normalizer;
 use Illuminate\Support\Pluralizer;
 use Thapp\XsltBridge\Engines\XslEngine;
 use Illuminate\View\ViewServiceProvider;
@@ -95,10 +97,11 @@ class XsltServiceProvider extends ViewServiceProvider
         });
     }
 
-    /**
-     * @todo register events
-     */
     public function boot()
     {
+        $me = $this;
+        $this->app->extend('view.engine.resolver', function() use ($me) {
+            return $me->register();
+        });
     }
 }
