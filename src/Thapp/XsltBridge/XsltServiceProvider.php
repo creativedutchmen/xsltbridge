@@ -99,9 +99,6 @@ class XsltServiceProvider extends ViewServiceProvider
 
     public function boot()
     {
-        $me = $this;
-        $this->app->extend('view.engine.resolver', function() use ($me) {
-            return $me->register();
-        });
+        $this->package('thapp/xsltbridge');
     }
 }
